@@ -8,28 +8,27 @@ namespace TPMTwinAPI.Services
     public class SprintCandidateService
     {
         private readonly SprintCandidateDbContext _context;
+        private readonly AdoQueryService _adoQueryService;
 
-        public SprintCandidateService(SprintCandidateDbContext context)
+        public SprintCandidateService(SprintCandidateDbContext context, AdoQueryService adoQueryService)
         {
             _context = context;
+            _adoQueryService = adoQueryService;
         }
 
         public async Task FetchAndAddSprintCandidatesAsync()
         {
-            List<SprintCandidates> candidates = await FetchSprintCandidatesAsync();
+            List<SprintCandidates> candidates = await _adoQueryService.FetchSprintCandidatesAsync();
             if (candidates != null && candidates.Count > 0)
             {
-                _context.SprintCandidates.AddRange(candidates);
-                await _context.SaveChangesAsync();
+                var existingIds = _context.SprintCandidates.Select(x => x.Id).ToHashSet();
+                var newCandidates = candidates.Where(c => !existingIds.Contains(c.Id)).ToList();
+                if (newCandidates.Count > 0)
+                {
+                    _context.SprintCandidates.AddRange(newCandidates);
+                    await _context.SaveChangesAsync();
+                }
             }
-        }
-
-        // This should be implemented to fetch data from your source
-        public async Task<List<SprintCandidates>> FetchSprintCandidatesAsync()
-        {
-            // TODO: Replace with actual fetching logic
-            await Task.Delay(100); // Simulate async work
-            return new List<SprintCandidates>();
         }
     }
 }
