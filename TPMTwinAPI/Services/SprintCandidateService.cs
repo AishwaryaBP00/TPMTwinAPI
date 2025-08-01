@@ -21,13 +21,30 @@ namespace TPMTwinAPI.Services
             List<SprintCandidates> candidates = await _adoQueryService.FetchSprintCandidatesAsync();
             if (candidates != null && candidates.Count > 0)
             {
-                var existingIds = _context.SprintCandidates.Select(x => x.Id).ToHashSet();
-                var newCandidates = candidates.Where(c => !existingIds.Contains(c.Id)).ToList();
-                if (newCandidates.Count > 0)
+                var existingCandidates = _context.SprintCandidates.ToDictionary(x => x.Id);
+                foreach (var candidate in candidates)
                 {
-                    _context.SprintCandidates.AddRange(newCandidates);
-                    await _context.SaveChangesAsync();
+                    if (existingCandidates.TryGetValue(candidate.Id, out var existing))
+                    {
+                        // Update all properties
+                        existing.Title = candidate.Title;
+                        existing.Status = candidate.Status;
+                        existing.Tags = candidate.Tags;
+                        existing.Priority = candidate.Priority;
+                        existing.LastUpdated = candidate.LastUpdated;
+                        existing.AIInsights = candidate.AIInsights;
+                        existing.Description = candidate.Description;
+                        existing.AcceptanceCriteria = candidate.AcceptanceCriteria;
+                        existing.LinkedDocs = candidate.LinkedDocs;
+                        existing.Type = candidate.Type;
+                        existing.ParentItemId = candidate.ParentItemId;
+                    }
+                    else
+                    {
+                        _context.SprintCandidates.Add(candidate);
+                    }
                 }
+                await _context.SaveChangesAsync();
             }
         }
     }
