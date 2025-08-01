@@ -5,7 +5,7 @@ namespace TPMTwinAPI.Models
     public class SprintCandidates
     {
         [Key]
-        public int ID { get; set; }
+        public string Id { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public string[] Tags { get; set; } = Array.Empty<string>();

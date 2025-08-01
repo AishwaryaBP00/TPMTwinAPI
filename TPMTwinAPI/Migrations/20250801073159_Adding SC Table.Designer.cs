@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TPMTwinAPI;
+using TPMTwinAPI.Database;
 
 #nullable disable
 
 namespace TPMTwinAPI.Migrations
 {
     [DbContext(typeof(SprintCandidateDbContext))]
-    [Migration("20250801070622_Added SprintCandidate Table")]
-    partial class AddedSprintCandidateTable
+    [Migration("20250801073159_Adding SC Table")]
+    partial class AddingSCTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace TPMTwinAPI.Migrations
 
             modelBuilder.Entity("TPMTwinAPI.Models.SprintCandidates", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.PrimitiveCollection<string>("AIInsights")
                         .IsRequired()
@@ -68,7 +65,7 @@ namespace TPMTwinAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("SprintCandidates");
                 });

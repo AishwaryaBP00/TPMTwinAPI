@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TPMTwinAPI;
+using TPMTwinAPI.Database;
 
 #nullable disable
 
@@ -24,11 +24,8 @@ namespace TPMTwinAPI.Migrations
 
             modelBuilder.Entity("TPMTwinAPI.Models.SprintCandidates", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.PrimitiveCollection<string>("AIInsights")
                         .IsRequired()
@@ -65,7 +62,7 @@ namespace TPMTwinAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("SprintCandidates");
                 });

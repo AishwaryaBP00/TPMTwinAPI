@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TPMTwinAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedSprintCandidateTable : Migration
+    public partial class AddingSCTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace TPMTwinAPI.Migrations
                 name: "SprintCandidates",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -29,7 +28,7 @@ namespace TPMTwinAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SprintCandidates", x => x.ID);
+                    table.PrimaryKey("PK_SprintCandidates", x => x.Id);
                 });
         }
 

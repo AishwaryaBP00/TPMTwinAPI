@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TPMTwinAPI.Models;
 
-namespace TPMTwinAPI
+namespace TPMTwinAPI.Database
 {
     public class SprintCandidateDbContext : DbContext
     {
