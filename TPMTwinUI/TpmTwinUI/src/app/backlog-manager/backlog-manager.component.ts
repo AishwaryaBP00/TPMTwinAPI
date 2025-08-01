@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SprintCandidateSummaryDto } from '../api/models/sprint-candidate-summary-dto';
+import { SprintCandidatesService } from '../api/services/sprint-candidates.service';
 
 @Component({
   selector: 'app-backlog-manager',
@@ -8,34 +11,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './backlog-manager.component.html',
   styleUrls: ['./backlog-manager.component.scss']
 })
-export class BacklogManagerComponent {
-  backlogData = [
-    {
-      id: 1,
-      title: 'User login functionality',
-      status: 'Open',
-      tags: 'auth, user',
-      priority: 'High',
-      lastUpdated: '2025-07-30',
-      aiInsights: 'Consider OAuth2 for better security.'
-    },
-    {
-      id: 2,
-      title: 'Dashboard UI improvements',
-      status: 'In Progress',
-      tags: 'UI, dashboard',
-      priority: 'Medium',
-      lastUpdated: '2025-07-28',
-      aiInsights: 'Add quick stats widget.'
-    },
-    {
-      id: 3,
-      title: 'Sprint planning automation',
-      status: 'Closed',
-      tags: 'sprint, automation',
-      priority: 'Low',
-      lastUpdated: '2025-07-25',
-      aiInsights: 'Automate backlog grooming.'
-    }
-  ];
+
+export class BacklogManagerComponent implements OnInit {
+  backlogData: SprintCandidateSummaryDto[] = [];
+
+  constructor(private sprintCandidatesService: SprintCandidatesService) {}
+
+  ngOnInit(): void {
+    this.sprintCandidatesService.apiSprintCandidatesSummaryGet$Json().subscribe(data => {
+      this.backlogData = data;
+    });
+  }
 }

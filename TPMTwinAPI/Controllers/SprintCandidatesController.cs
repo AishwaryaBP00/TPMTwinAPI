@@ -24,18 +24,18 @@ namespace TPMTwinAPI.Controllers
 
         // GET: api/SprintCandidates/summary
         [HttpGet("summary")]
-        public async Task<ActionResult<IEnumerable<object>>> GetBasicItemInfo()
+        public async Task<ActionResult<IEnumerable<Models.SprintCandidateSummaryDto>>> GetBasicItemInfo()
         {
             var items = (await _adoQuery.FetchSprintCandidatesAsync())
-                .Select(x => new
+                .Select(x => new Models.SprintCandidateSummaryDto
                 {
                     Id = x.Id,
-                    x.Title,
-                    x.Status,
-                    x.Tags,
-                    x.Priority,
+                    Title = x.Title,
+                    Status = x.Status,
+                    Tags = x.Tags,
+                    Priority = x.Priority,
                     LastUpdated = x.LastUpdated,
-                    x.AIInsights
+                    AIInsights = x.AIInsights
                 })
                 .ToList();
             return Ok(items);
