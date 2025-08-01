@@ -18,6 +18,8 @@ namespace TPMTwinAPI.Services
             _httpClient = new HttpClient();
             _baseUrl = _config["AzureDevOps:BaseUrl"] ?? string.Empty;
             _pat = _config["AzureDevOps:PAT"] ?? string.Empty;
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (!string.IsNullOrEmpty(_pat))
             {
                 var authToken = Convert.ToBase64String(Encoding.ASCII.GetBytes($":{_pat}"));
@@ -31,7 +33,7 @@ namespace TPMTwinAPI.Services
             var wiqlUrl = $"{_baseUrl}/_apis/wit/wiql?api-version=7.0";
             var wiqlBody = new
             {
-                query = "SELECT [System.Id], [System.Title] FROM WorkItems WHERE [System.WorkItemType] = 'User Story' ORDER BY [System.Id] ASC"
+                query = "SELECT [System.Id], [System.Title], [System.ChangedDate] FROM WorkItems WHERE [System.WorkItemType] = 'User Story' ORDER BY [System.Id] ASC"
             };
             var wiqlContent = new StringContent(JsonSerializer.Serialize(wiqlBody), Encoding.UTF8, "application/json");
             var wiqlResp = await _httpClient.PostAsync(wiqlUrl, wiqlContent);
@@ -53,7 +55,8 @@ namespace TPMTwinAPI.Services
                     "System.State",
                     "System.Tags",
                     "Microsoft.VSTS.Common.Priority",
-                    "System.WorkItemType"
+                    "System.WorkItemType",
+                    "System.ChangedDate"
                 }
             };
             var batchContent = new StringContent(JsonSerializer.Serialize(batchBody), Encoding.UTF8, "application/json");
@@ -65,12 +68,12 @@ namespace TPMTwinAPI.Services
             // 3. Map to SprintCandidates
             var candidates = batchResult?.value?.Select(w => new SprintCandidates
             {
-                ID = w.id,
+                Id = w.id.ToString(),
                 Title = w.fields?.GetValueOrDefault("System.Title")?.ToString() ?? string.Empty,
                 Status = w.fields?.GetValueOrDefault("System.State")?.ToString() ?? string.Empty,
                 Tags = w.fields?.GetValueOrDefault("System.Tags")?.ToString()?.Split(';', ',').Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t)).ToArray() ?? Array.Empty<string>(),
                 Priority = w.fields?.GetValueOrDefault("Microsoft.VSTS.Common.Priority")?.ToString() ?? string.Empty,
-                LastUpdated = DateTime.UtcNow, // Not available in response, set to now
+                LastUpdated = w.fields != null && w.fields.ContainsKey("System.ChangedDate") && DateTime.TryParse(w.fields["System.ChangedDate"].ToString(), out var changedDate) ? changedDate : DateTime.UtcNow,
                 AIInsights = Array.Empty<string>(),
                 Description = string.Empty,
                 AcceptanceCriteria = string.Empty,

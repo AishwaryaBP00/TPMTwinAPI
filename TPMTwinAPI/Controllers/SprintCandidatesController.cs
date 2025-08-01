@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TPMTwinAPI.Services;
 using TPMTwinAPI.Database;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,12 +24,12 @@ namespace TPMTwinAPI.Controllers
 
         // GET: api/SprintCandidates/summary
         [HttpGet("summary")]
-        public ActionResult<IEnumerable<object>> GetBasicItemInfo()
+        public async Task<ActionResult<IEnumerable<object>>> GetBasicItemInfo()
         {
-            var items = _context.SprintCandidates
+            var items = (await _adoQuery.FetchSprintCandidatesAsync())
                 .Select(x => new
                 {
-                    x.Id,
+                    Id = x.Id,
                     x.Title,
                     x.Status,
                     x.Tags,
