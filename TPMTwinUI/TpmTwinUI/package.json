@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:TpmTwinUI": "node dist/tpm-twin-ui/server/server.mjs"
+    "serve:ssr:TpmTwinUI": "node dist/tpm-twin-ui/server/server.mjs",
+    "openapi:gen": "ng-openapi-gen --config apigenconfig.json"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-openapi-gen": "^0.53.0",
     "typescript": "~5.5.2"
   }
 }
