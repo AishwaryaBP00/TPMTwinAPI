@@ -1,0 +1,55 @@
+.abb-title-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.abb-subtitles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+.abb-subtitles h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #666;
+}
+.abb-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  height: 28px;
+}
+.abb-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem;
+}
+.header {
+  background: #fff;
+  color: #444;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1.5px solid #e0e0e0;
+}
+
+.hamburger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+.hamburger svg {
+  display: block;
+}
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
