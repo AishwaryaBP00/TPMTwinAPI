@@ -13,6 +13,8 @@ namespace TPMTwinAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<TPMTwinAPI.Services.SprintCandidateService>();
+            builder.Services.AddHostedService<TPMTwinAPI.Services.SprintCandidateBackgroundService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
