@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 namespace TPMTwinAPI
 {
     public class Program
@@ -13,6 +14,8 @@ namespace TPMTwinAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<SprintCandidateDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
             var app = builder.Build();
 
