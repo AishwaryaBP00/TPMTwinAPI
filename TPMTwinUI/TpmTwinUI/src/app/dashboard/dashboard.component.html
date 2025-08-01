@@ -1,4 +1,33 @@
-<div class="dashboard">
-  <h2>Dashboard</h2>
-  <p>Welcome to the Dashboard!</p>
+<div class="dashboard"  style="background: #f7f8fa;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <span style="font-weight: bold; font-size: 1.2rem;">Dashboard</span>
+      <span style="font-size: 1.1rem;">| Opportunity Loss Manager</span>
+    </div>
+    <div style="font-size: 1rem; color: #555;">{{ today | date:'mediumDate' }}</div>
+  </div>
+  <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+    <div style="flex: 1; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; min-height: 180px;">
+      <h3 style="margin-top: 0;">Smart Agenda</h3>
+      <!-- Content for Smart Agenda -->
+    </div>
+    <div style="flex: 1; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; min-height: 180px;">
+      <h3 style="margin-top: 0;">Focus Goals</h3>
+      <!-- Content for Focus Goals -->
+    </div>
+  </div>
+  <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+    <div style="flex: 1; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; min-height: 120px;">
+      <h3 style="margin-top: 0;">Sprint Readiness</h3>
+      <!-- Content for Sprint Readiness -->
+    </div>
+    <div style="flex: 1; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; min-height: 120px;">
+      <h3 style="margin-top: 0;">FeedBack</h3>
+      <!-- Content for FeedBack -->
+    </div>
+    <div style="flex: 1; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; min-height: 120px;">
+      <h3 style="margin-top: 0;">Team Health</h3>
+      <!-- Content for Team Health -->
+    </div>
+  </div>
 </div>
