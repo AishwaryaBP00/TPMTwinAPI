@@ -15,5 +15,7 @@ namespace TPMTwinAPI.Models
         public string Description { get; set; } = string.Empty;
         public string AcceptanceCriteria { get; set; } = string.Empty;
         public string[] LinkedDocs { get; set; } = Array.Empty<string>();
+        public string Type { get; set; } = string.Empty;
+        public string ParentItemId { get; set; } = string.Empty;
     }
 }
