@@ -11,10 +11,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { apiSprintCandidatesDetailsGet$Json } from '../fn/sprint-candidates/api-sprint-candidates-details-get-json';
-import { ApiSprintCandidatesDetailsGet$Json$Params } from '../fn/sprint-candidates/api-sprint-candidates-details-get-json';
-import { apiSprintCandidatesDetailsGet$Plain } from '../fn/sprint-candidates/api-sprint-candidates-details-get-plain';
-import { ApiSprintCandidatesDetailsGet$Plain$Params } from '../fn/sprint-candidates/api-sprint-candidates-details-get-plain';
+import { apiSprintCandidatesDetailsIdGet$Json } from '../fn/sprint-candidates/api-sprint-candidates-details-id-get-json';
+import { ApiSprintCandidatesDetailsIdGet$Json$Params } from '../fn/sprint-candidates/api-sprint-candidates-details-id-get-json';
+import { apiSprintCandidatesDetailsIdGet$Plain } from '../fn/sprint-candidates/api-sprint-candidates-details-id-get-plain';
+import { ApiSprintCandidatesDetailsIdGet$Plain$Params } from '../fn/sprint-candidates/api-sprint-candidates-details-id-get-plain';
 import { apiSprintCandidatesPost$Json } from '../fn/sprint-candidates/api-sprint-candidates-post-json';
 import { ApiSprintCandidatesPost$Json$Params } from '../fn/sprint-candidates/api-sprint-candidates-post-json';
 import { apiSprintCandidatesPost$Plain } from '../fn/sprint-candidates/api-sprint-candidates-post-plain';
@@ -27,6 +27,7 @@ import { apiSprintCandidatesSummaryGet$Json } from '../fn/sprint-candidates/api-
 import { ApiSprintCandidatesSummaryGet$Json$Params } from '../fn/sprint-candidates/api-sprint-candidates-summary-get-json';
 import { apiSprintCandidatesSummaryGet$Plain } from '../fn/sprint-candidates/api-sprint-candidates-summary-get-plain';
 import { ApiSprintCandidatesSummaryGet$Plain$Params } from '../fn/sprint-candidates/api-sprint-candidates-summary-get-plain';
+import { SprintCandidateDetailsDto } from '../models/sprint-candidate-details-dto';
 import { SprintCandidates } from '../models/sprint-candidates';
 import { SprintCandidateSummaryDto } from '../models/sprint-candidate-summary-dto';
 
@@ -83,50 +84,50 @@ export class SprintCandidatesService extends BaseService {
     );
   }
 
-  /** Path part for operation `apiSprintCandidatesDetailsGet()` */
-  static readonly ApiSprintCandidatesDetailsGetPath = '/api/SprintCandidates/details';
+  /** Path part for operation `apiSprintCandidatesDetailsIdGet()` */
+  static readonly ApiSprintCandidatesDetailsIdGetPath = '/api/SprintCandidates/details/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiSprintCandidatesDetailsGet$Plain()` instead.
+   * To access only the response body, use `apiSprintCandidatesDetailsIdGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiSprintCandidatesDetailsGet$Plain$Response(params?: ApiSprintCandidatesDetailsGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<any>>> {
-    return apiSprintCandidatesDetailsGet$Plain(this.http, this.rootUrl, params, context);
+  apiSprintCandidatesDetailsIdGet$Plain$Response(params: ApiSprintCandidatesDetailsIdGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SprintCandidateDetailsDto>> {
+    return apiSprintCandidatesDetailsIdGet$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiSprintCandidatesDetailsGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `apiSprintCandidatesDetailsIdGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiSprintCandidatesDetailsGet$Plain(params?: ApiSprintCandidatesDetailsGet$Plain$Params, context?: HttpContext): Observable<Array<any>> {
-    return this.apiSprintCandidatesDetailsGet$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<any>>): Array<any> => r.body)
+  apiSprintCandidatesDetailsIdGet$Plain(params: ApiSprintCandidatesDetailsIdGet$Plain$Params, context?: HttpContext): Observable<SprintCandidateDetailsDto> {
+    return this.apiSprintCandidatesDetailsIdGet$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SprintCandidateDetailsDto>): SprintCandidateDetailsDto => r.body)
     );
   }
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiSprintCandidatesDetailsGet$Json()` instead.
+   * To access only the response body, use `apiSprintCandidatesDetailsIdGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiSprintCandidatesDetailsGet$Json$Response(params?: ApiSprintCandidatesDetailsGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<any>>> {
-    return apiSprintCandidatesDetailsGet$Json(this.http, this.rootUrl, params, context);
+  apiSprintCandidatesDetailsIdGet$Json$Response(params: ApiSprintCandidatesDetailsIdGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SprintCandidateDetailsDto>> {
+    return apiSprintCandidatesDetailsIdGet$Json(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiSprintCandidatesDetailsGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `apiSprintCandidatesDetailsIdGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiSprintCandidatesDetailsGet$Json(params?: ApiSprintCandidatesDetailsGet$Json$Params, context?: HttpContext): Observable<Array<any>> {
-    return this.apiSprintCandidatesDetailsGet$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<any>>): Array<any> => r.body)
+  apiSprintCandidatesDetailsIdGet$Json(params: ApiSprintCandidatesDetailsIdGet$Json$Params, context?: HttpContext): Observable<SprintCandidateDetailsDto> {
+    return this.apiSprintCandidatesDetailsIdGet$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SprintCandidateDetailsDto>): SprintCandidateDetailsDto => r.body)
     );
   }
 
