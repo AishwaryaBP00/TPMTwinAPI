@@ -20,10 +20,10 @@
 .abb-icon {
   display: flex;
   align-items: center;
-  margin-right: 0.5rem;
-  height: 28px;
-}
-.abb-icon {
+  height: 24px;
+  width: auto;
+  max-width: 60px;
+  display: block;
   display: flex;
   align-items: center;
   margin-right: 0.75rem;
@@ -52,4 +52,11 @@
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 0.05em;
+}
+
+.abb-logo-img{
+    height: 30px;
+    width: auto;
+    display: block;
+    margin-right: 1rem;
 }
