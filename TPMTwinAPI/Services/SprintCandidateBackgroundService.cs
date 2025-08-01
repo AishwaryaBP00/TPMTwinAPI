@@ -9,7 +9,7 @@ namespace TPMTwinAPI.Services
     public class SprintCandidateBackgroundService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly TimeSpan _interval = TimeSpan.FromMinutes(10); // Change interval as needed
+        private readonly TimeSpan _interval = TimeSpan.FromMinutes(30); // Change interval as needed
 
         public SprintCandidateBackgroundService(IServiceProvider serviceProvider)
         {

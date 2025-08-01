@@ -41,22 +41,26 @@ namespace TPMTwinAPI.Controllers
             return Ok(items);
         }
 
-        // GET: api/SprintCandidates/details
-        [HttpGet("details")]
-        public ActionResult<IEnumerable<object>> GetItemDetails()
+        // GET: api/SprintCandidates/details/{id}
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<Models.SprintCandidateDetailsDto>> GetItemDetails(string id)
         {
-            var items = _context.SprintCandidates
-                .Select(x => new
+            var item = (await _adoQuery.FetchSprintCandidatesAsync())
+                .Where(x => x.Id == id)
+                .Select(x => new Models.SprintCandidateDetailsDto
                 {
-                    x.Id,
-                    x.Title,
-                    x.Description,
-                    x.AcceptanceCriteria,
-                    x.LinkedDocs
+                    Id = x.Id,
+                    Title = x.Title,
+                    Description = x.Description,
+                    AcceptanceCriteria = x.AcceptanceCriteria,
+                    LinkedDocs = x.LinkedDocs
                 })
-                .ToList();
-            return Ok(items);
+                .FirstOrDefault();
+            if (item == null)
+                return NotFound();
+            return Ok(item);
         }
+
         // POST: api/SprintCandidates
         [HttpPost]
         public ActionResult<Models.SprintCandidates> AddItem([FromBody] Models.SprintCandidates sprintCandidate)
@@ -69,7 +73,8 @@ namespace TPMTwinAPI.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetBasicItemInfo), new { id = sprintCandidate.Id }, sprintCandidate);
         }
-                // GET: api/SprintCandidates/search?query=yourstring
+
+        // GET: api/SprintCandidates/search?query=yourstring
         [HttpGet("search")]
         public ActionResult<IEnumerable<Models.SprintCandidates>> SearchItem([FromQuery] string query)
         {
