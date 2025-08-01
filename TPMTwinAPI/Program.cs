@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using TPMTwinAPI.Services;
 using TPMTwinAPI.Database;
 namespace TPMTwinAPI
 {
@@ -15,6 +16,7 @@ namespace TPMTwinAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<AdoQueryService>();
             builder.Services.AddDbContext<SprintCandidateDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
