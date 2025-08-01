@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SprintCandidateSummaryDto } from '../api/models/sprint-candidate-summary-dto';
@@ -21,5 +20,20 @@ export class BacklogManagerComponent implements OnInit {
     this.sprintCandidatesService.apiSprintCandidatesSummaryGet$Json().subscribe(data => {
       this.backlogData = data;
     });
+  }
+
+  getRelativeTime(dateString: string | undefined | null): string {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHr = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHr / 24);
+    if (diffDay > 0) return `${diffDay} day${diffDay > 1 ? 's' : ''} ago`;
+    if (diffHr > 0) return `${diffHr} hour${diffHr > 1 ? 's' : ''} ago`;
+    if (diffMin > 0) return `${diffMin} minute${diffMin > 1 ? 's' : ''} ago`;
+    return 'just now';
   }
 }
