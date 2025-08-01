@@ -65,7 +65,7 @@ namespace TPMTwinAPI.Services
             // 3. Map to SprintCandidates
             var candidates = batchResult?.value?.Select(w => new SprintCandidates
             {
-                ID = w.id,
+                Id = w.id.ToString(),
                 Title = w.fields?.GetValueOrDefault("System.Title")?.ToString() ?? string.Empty,
                 Status = w.fields?.GetValueOrDefault("System.State")?.ToString() ?? string.Empty,
                 Tags = w.fields?.GetValueOrDefault("System.Tags")?.ToString()?.Split(';', ',').Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t)).ToArray() ?? Array.Empty<string>(),
