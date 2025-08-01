@@ -1,0 +1,29 @@
+.nav-icon svg, .nav-icon svg * {
+  pointer-events: none;
+}
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+.navbar {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #444;
+  height: 100%;
+  padding: 1rem 0;
+  border-right: 1.5px solid #e0e0e0;
+}
+.navbar a {
+  color: #444;
+  padding: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.navbar a.active, .navbar a:hover {
+  background: #f0f0f0;
+  color: #222;
+}
