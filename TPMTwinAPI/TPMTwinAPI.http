@@ -1,0 +1,6 @@
+@TPMTwinAPI_HostAddress = http://localhost:5171
+
+GET {{TPMTwinAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
