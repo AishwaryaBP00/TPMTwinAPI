@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TPMTwinAPI.Services;
 using TPMTwinAPI.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,10 +11,12 @@ namespace TPMTwinAPI.Controllers
     public class SprintCandidatesController : ControllerBase
     {
         private readonly SprintCandidateDbContext _context;
+        private readonly AdoQueryService _adoQuery;
 
-        public SprintCandidatesController(SprintCandidateDbContext context)
+        public SprintCandidatesController(SprintCandidateDbContext context, AdoQueryService adoQuery)
         {
             _context = context;
+            _adoQuery = adoQuery;
         }
 
         // GET: api/SprintCandidates/summary
